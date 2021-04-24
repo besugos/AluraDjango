@@ -1,4 +1,12 @@
 from django.contrib import admin
 from .models import Receita
 
-admin.site.register(Receita)
+class ListandoReceitas(admin.ModelAdmin):
+    list_display = ('id', 'nome', 'publicada')
+    list_display_links = ('id', 'nome')
+    search_fields = ('nome',)
+    list_filter = ('categoria',)
+    list_editable = ('publicada',)
+    list_per_page = 2
+
+admin.site.register(Receita, ListandoReceitas)
